@@ -1,18 +1,43 @@
+
+
+
 section{
 	width:350x;
 	max-width:400px;
 	height:auto;
-	border:1px black solid;
 	display;flex;
 	margin:0 auto;
 	
 	
 }
-
 section td{
 	width:50px;
-	border:1px blue solid;
 	display:inline-block;
 	line-height:50px;
+	text-align:center;
 
 }
+section tr{
+	display:inline-block;
+	line-height:50px;
+	text-align:center;
+}
+.white{
+	color:white;
+}
+header{
+	width:350x;
+	max-width:400px;
+	height:auto;
+	margin:0 auto;
+	margin-bottom:5%;
+}
+h1{
+	text-align:center;
+}
+#month{
+	margin-left: 27%;
+}
+
+
+

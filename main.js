@@ -1,107 +1,68 @@
-/*
-function NumberDayPerMonth(month,year){
-	nbreJours = 0
-	if((month =='janvier') || (month == 'mars') || (month == 'mai') || (month == 'juillet') || (month == 'aout') || (month == 'octobre') || (month == 'decembre')) {
-		console.log('le nombre de jours est 31')
-		nbreJours = 31
-	}else if((month == 'avril') || (month == 'juin') || (month == 'septembre') || (month == 'novembre')) {
-		console.log('le nombre de jours est 30')
-		nbreJours = 30
-	}else if(month =='fevrier'){
-		if((((year % 4) == 0) && ((year % 100) != 0)) || (((year % 400)== 0))){
-			console.log('le nombre de jours est de 29')
-			nbreJours = 29
-		}else{
-			console.log('le nombre de jours est 28')
-			nbreJours = 28
-		}
-		
+//on commence par le calcul du nombre de jours
+//a partie du 01012000 jusqu'au mois/année à afficher
+//1ere fonction Bissextile renvoi boleen
+//boucle calculant le nombre de  jours par année sur un ecart donné
+var button = document.getElementById('button-go')
+button.addEventListener('click',function(){
+	
+	
+	// var month = document.getElementById('month').value
+	var month = document.getElementById('month').selectedIndex;
+	var year = document.getElementById('year').value
+
+	
+	var jourTot = (CountDaySinceYear(year))
+
+	var tot = countDaySinceJanuary(month,year)
+	var calcul = ((jourTot + tot)%7)-2
+	
+	checkTable()	
+	
+	var bodyElt =document.querySelector('section')
+	var tableCont = document.createElement('table')
+	tableCont.id = 'check'
+	bodyElt.appendChild(tableCont)	
+	var ligneSem = document.createElement('tr');
+	tableCont.appendChild(ligneSem);
+	var tabsem = ['lun','mar','mer','jeu','ven','sam','dim']
+	for(let i =0; i < tabsem.length;i++){
+		var caseJour = document.createElement('td')
+		ligneSem.appendChild(caseJour)
+		caseJour.textContent = tabsem[i]		
+	}
+	if(calcul == -1){
+		calcul = 6
+	}else if(calcul == -2){
+		calcul = 5
 	}	
-	return nbreJours
-		
-
-}
-NumberDayPerMonth('fevrier','2000')
-var nombreJourParMois = NumberDayPerMonth('fevrier','2003')
-console.log(nombreJourParMois)
-
-
-
-
-
-function AnnéeBissextileVrai(year){
-	if (year < 4) return false
-	
-	return year % 400 == 0 || (year % 100 !=0 && year % 4 == 0)
-}
-function CompterJoursDepuisAnnée(fromYear, toYear){
-	var calculDayPerYear = 0
-	
-	for(var i = fromYear; i < toYear;i++)
-		if (AnnéeBissextileVrai(i)){calculDayPerYear = calculDayPerYear+366}
-		else  {calculDayPerYear = calculDayPerYear+365}
-	
-	return calculDayPerYear
-}
-console.log(CompterJoursDepuisAnnée(2000,2013))
-var jourTot = (CompterJoursDepuisAnnée(2000,2013))
-
-function countDaySinceJanuary(month,year){
-	nbredeJourstot = 0
-	if(month == 'janvier'){
-		nbredeJourstot = 0
-	}else if (month == 'fevrier'){
-		nbredeJourstot = 31	
-	}else if (month == 'mars'){
-		nbredeJourstot = 59
-	}else if (month == 'avril'){
-		nbredeJourstot = 90
-	}else if(month == 'mai'){
-		nbredeJourstot = 120
-	}else if(month == 'juin'){
-		nbredeJourstot = 151
-	}else if(month == 'juillet'){
-		nbredeJourstot = 181
-	}else if(month == 'aout'){
-		nbredeJourstot = 212
-	}else if(month == 'septembre'){
-		nbredeJourstot = 243
-	}else if (month == 'octobre'){
-		nbredeJourstot = 273
-	}else if (month == 'novembre'){
-		nbredeJourstot = 304
-	}else if (month == 'decembre'){
-		nbredeJourstot = 334
+	var nbCaseTot = 0;
+	for(let i = 0 ; i < calcul ; i++){
+		var ligneBlanc = document.createElement('tr')
+		tableCont.appendChild(ligneBlanc);
+		var bodyElt =document.querySelector('section')
+		var caseBlanc = document.createElement('td')
+		ligneBlanc.appendChild(caseBlanc)
+		caseBlanc.textContent = 1
+		caseBlanc.classList.add('white')
+		nbCaseTot ++
+	}
+	var nombreJourParMois = NumberDayPerMonth(month,year)
+	var ligneCourante = document.createElement('tr')
+	tableCont.appendChild(ligneCourante);
+	//boucle permettant l'affichage du calendrier
+	for(let i = 1 ; i <= nombreJourParMois ; i++){		
+		if(nbCaseTot % 7 == 0) {
+			var ligneCourante = document.createElement('tr')
+			tableCont.appendChild(ligneCourante);
+		}
+	var caseCourante = document.createElement('td')
+	ligneCourante.appendChild(caseCourante)
+	caseCourante.textContent = i
+	nbCaseTot ++
 	}
 	
-	if((((year % 4) == 0) && ((year % 100) != 0)) || (((year % 400)== 0))){
-		nbredeJourstot = nbredeJourstot +1
-	}
-	return nbredeJourstot
-}
-var tot = countDaySinceJanuary('fevrier','2013')
-console.log(tot)
+})//Fin de l'addEventListener
 
-var calcul = (jourTot + tot)%7
-console.log(calcul)
-*/
-//ici var calcul
-for(let i = 0 ; i < 6 ; i++){
-var bodyElt =document.querySelector('section')
-var table = document.createElement('td')
-bodyElt.appendChild(table)
-table.textContent = 1
-}
-
-
-//ici var nombreJourParMois = NumberDayPerMonth('fevrier','2003')
-
-for(let i = 1 ; i < 30 ; i++){
-var bodyElt =document.querySelector('section')
-var table = document.createElement('td')
-bodyElt.appendChild(table)
-table.textContent = i
-}
 
 
 
